@@ -1,6 +1,7 @@
 package com.owlite.shelterit.core.designsystem.theme
 
 import android.os.Build
+import androidx.activity.ComponentActivity
 import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -8,7 +9,11 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 
 /**
@@ -77,6 +82,7 @@ val DarkColorScheme = darkColorScheme(
     outline = Cream70,
 )
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun ShelterItTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -94,9 +100,23 @@ fun ShelterItTheme(
         else -> LightColorScheme
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = ShelterItTypography,
-        content = content
-    )
+    val context = LocalContext.current
+    val windowSizeClass = calculateWindowSizeClass(context as ComponentActivity)
+    val spacing = when (windowSizeClass.widthSizeClass) {
+        WindowWidthSizeClass.Compact -> ShelterItDimension.compact
+        WindowWidthSizeClass.Medium -> ShelterItDimension.medium
+        WindowWidthSizeClass.Expanded -> ShelterItDimension.expanded
+        else -> ShelterItDimension.medium
+    }
+
+    CompositionLocalProvider(
+        LocalSpacing provides spacing,
+        LocalComponentDimensions provides ComponentDimensions()
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = ShelterItTypography,
+            content = content
+        )
+    }
 }

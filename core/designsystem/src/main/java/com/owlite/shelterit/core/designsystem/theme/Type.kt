@@ -16,7 +16,7 @@ import com.owlite.core.designsystem.R
  * Define font used in Shelter It
  * @see <a href="https://www.figma.com/design/7QHjQINgUGrS4pUjEnLueg/Miaw-Design-System?node-id=546-1718&t=1HPn86QTgPVJO0km-4">Miaw DS - Typography</a>
  */
-val fontName = GoogleFont("Fredoka")
+val fontName = GoogleFont("Fredoka One")
 val provider = GoogleFont.Provider(
     providerAuthority = "com.google.android.gms.fonts",
     providerPackage = "com.google.android.gms",
