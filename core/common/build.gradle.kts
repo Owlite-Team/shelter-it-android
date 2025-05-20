@@ -1,15 +1,14 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "com.owlite.core.designsystem"
+    namespace = "com.owlite.shelterit.core.common"
     compileSdk = 36
 
     defaultConfig {
-        minSdk = 27
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -31,9 +30,6 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
@@ -41,12 +37,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    api(platform(libs.androidx.compose.bom))
-    api(libs.bundles.compose.ui)
-    api(libs.androidx.compose.material3.navigationSuite)
-    api(libs.androidx.compose.material3.windowSizeClass)
-    implementation(libs.androidx.ui.text.google.fonts)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -1,4 +1,4 @@
-package com.owlite.core.designsystem
+package com.owlite.feature.auth
 
 import org.junit.Test
 
