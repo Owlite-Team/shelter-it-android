@@ -19,5 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Shelter It"
+rootProject.name = "shelterit"
 include(":app")
+
+include(":core:designsystem")
