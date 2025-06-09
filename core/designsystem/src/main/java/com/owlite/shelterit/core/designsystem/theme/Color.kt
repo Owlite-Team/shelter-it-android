@@ -1,4 +1,4 @@
-package com.owlite.core.designsystem.theme
+package com.owlite.shelterit.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
